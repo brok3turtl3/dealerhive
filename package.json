@@ -1,0 +1,27 @@
+{
+  "name": "dealerhive",
+  "version": "1.0.0",
+  "description": "Dealer communications and management tool",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brok3turtl3/dealerhive.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brok3turtl3/dealerhive/issues"
+  },
+  "homepage": "https://github.com/brok3turtl3/dealerhive#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}

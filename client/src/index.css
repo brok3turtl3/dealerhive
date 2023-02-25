@@ -5,3 +5,8 @@
 button > svg {
   margin-right: 5px;
 }
+
+body {
+  background-color: black;
+  color: white
+}
