@@ -4,7 +4,7 @@ import express from 'express';
 import connectDB from './config/db.js';
 import dotenv from 'dotenv';
 
-//import userRoutes from './routes/userRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 //import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
@@ -17,13 +17,11 @@ app.use(express.json());
 connectDB();
 
 
-//app.use('/api/users', userRoutes);
+app.use('/api/users', userRoutes);
 // app.use('/api/orders', orderRoutes);
 // app.use('/api/recipes', recipeRoutes);
 
-app.get('/api/config/paypal', (req, res) =>
-	res.send(process.env.PAYPAL_CLIENT_ID)
-);
+
 
 const __dirname = path.resolve();
 

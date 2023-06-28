@@ -1,19 +1,30 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import LandingPage from './pages/LandingPage';
-// import HeaderNav from './components/HeaderNav';
-// import Footer from './components/Footer';
+import LandingPage from './pages/LandingPage.js';
+import HeaderNav from './components/HeaderNav';
+import Footer from './components/Footer';
+import Homepage from './pages/HomePage.js'
+
+import { Provider } from 'react-redux';
+import store from './store';
 
 function App() {
   return (
+    <Provider store = {store}>
     <Router>
       <div className='container '>
-        <h1>TEST!!!!</h1>
-      {/* <HeaderNav />
+        
+      <HeaderNav />
     
-      <LandingPage />
-      <Footer /> */}
+      <Routes>
+      
+      <Route path='/homepage' element={<Homepage />} />
+      <Route path='/' element={<LandingPage />} />
+      </Routes>
+      <Footer />
     </div>
-  </Router>);
+  </Router>
+  </Provider>
+  )
 }
 
 export default App;
