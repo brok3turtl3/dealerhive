@@ -5,13 +5,19 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 import {
 	userLoginReducer
 } from './reducers/userReducers';
+import {userListReducer} from './reducers/userListReducers'
 import { taskListReducer } from './reducers/taskListReducers';
+import { targetUserReducer } from './reducers/targetUserReducers';
+import { assignedTaskListReducer } from './reducers/assignedTaskReducers';
 
 
 const reducer = combineReducers({
 	
 	userLogin: userLoginReducer,
-	taskList: taskListReducer
+	taskList: taskListReducer,
+	userList: userListReducer,
+	targetUser: targetUserReducer,
+	assignedTaskList: assignedTaskListReducer
 	
 });
 

@@ -13,6 +13,12 @@ import {
 	
 } from '../constants/taskListConstants';
 
+import {
+	ASSIGNED_TASK_LIST_REQUEST,
+	ASSIGNED_TASK_LIST_SUCCESS,
+	ASSIGNED_TASK_LIST_FAIL
+} from '../constants/assignedTasklistConstants'
+
 export const getTasks = (userId) => async (dispatch) => {
     console.log('getTasks action hit!!!')
     console.log(userId)
@@ -53,7 +59,48 @@ export const getTasks = (userId) => async (dispatch) => {
 	}
 };
 
-export const addTask = (user, name, taskDescription) => async (dispatch) => {
+export const getAssignedTasks = (userId) => async (dispatch) => {
+	console.log('getTasks action hit!!!')
+    console.log(userId)
+	try {
+		dispatch({
+			type: ASSIGNED_TASK_LIST_REQUEST,
+		});
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		};
+
+		const { data } = await axios.get(
+			`http://localhost:3000/api/tasks/assignedTasks/?userId=${userId}`,
+			
+			config
+		);
+
+        console.log('taskActions after axios :', data)
+
+		dispatch({
+			type: ASSIGNED_TASK_LIST_SUCCESS,
+			payload: data,
+		});
+
+		
+	} catch (error) {
+		console.log(error.message);
+		dispatch({
+			type: ASSIGNED_TASK_LIST_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+
+}
+
+export const addTask = (user, name, taskDescription, assignedBy, assignedByName, assignedToName) => async (dispatch) => {
     console.log('ADDTASKS action hit!!!')
     console.log(user, name, taskDescription)
 	try {
@@ -69,7 +116,7 @@ export const addTask = (user, name, taskDescription) => async (dispatch) => {
 
 		const data = await axios.post(
 			`http://localhost:3000/api/tasks/`,
-			{ user, name, taskDescription},
+			{ user, name, taskDescription, assignedBy, assignedByName, assignedToName},
 			config
 		);
 

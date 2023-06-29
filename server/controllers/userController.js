@@ -50,6 +50,8 @@ const authUser = asyncHandler(async (req, res) => {
 			_id: user._id,
 			name: user.name,
 			email: user.email,
+			profilePic: user.profilePic,
+			title: user.title,
 			seniority: user.seniority,
 			isAdmin: user.isAdmin,
 			token: generateToken(user._id),
@@ -106,11 +108,13 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 	}
 });
 
-//ENDPOINT  GET api/users
+//ENDPOINT  GET api/users/:seniorty
 //PURPOSE   Retrieve all users
 //ACCESS    Private / Admin
 const getUsers = asyncHandler(async (req, res) => {
-	const users = await User.find({});
+	const {seniority} = req.params
+	console.log('this is in my route!', seniority)
+	const users = await User.find({seniority: {$gt: `${seniority}`}});
 	res.json(users);
 });
 
@@ -133,6 +137,8 @@ const deleteUser = asyncHandler(async (req, res) => {
 //PURPOSE   Retrieve user by id
 //ACCESS    Private / Admin
 const getUserById = asyncHandler(async (req, res) => {
+	console.log('GET USER BY ID HIT!!!', )
+	console.log(req.params.id)
 	const user = await User.findById(req.params.id).select('-password');
 
 	if (user) {

@@ -7,22 +7,28 @@ import Task from '../models/taskModel.js';
 //PURPOSE   Add a new task
 //ACCESS    Private
 const addTask = asyncHandler(async (req, res) => {
-	const { user, name, taskDescription  } = req.body;
+	const { user, name, taskDescription, assignedBy, assignedByName, assignedToName  } = req.body;
 	console.log('Add Task route hit!')
 
 	
 	const task = await Task.create({
 		user,
 		name,
-		taskDescription
+		taskDescription,
+		assignedBy,
+		assignedByName,
+		assignedToName
 	});
 
-	if (user) {
+	if (task) {
 		res.status(201).json({
 			_id: task._id,
 			user: task.user,
 			name: task.name,
+			assignedBy: task.assignedBy,
+			assignedByName: task.assignedByName,
 			taskDescription: task.taskDescription,
+			assignedToName: task.assignedToName
 			
 		});
 	} else {
@@ -39,6 +45,17 @@ const getTasks = asyncHandler(async (req, res) => {
 	const {userId} = req.query
 	console.log(userId)
 	const tasks = await Task.find({user: userId});
+	res.json(tasks);
+});
+
+//ENDPOINT  GET api/tasks/assignedTasks
+//PURPOSE   Retrieve all assigned tasks by user ID
+//ACCESS    Private
+const getAssignedTasks = asyncHandler(async (req, res) => {
+	console.log('getTasks route handler hit!')
+	const {userId} = req.query
+	console.log(userId)
+	const tasks = await Task.find({assignedBy: userId, user: { $ne: userId}});
 	res.json(tasks);
 });
 
@@ -72,5 +89,6 @@ const deleteTask = asyncHandler(async (req, res) => {
 export {
 	addTask,
     getTasks,
-    deleteTask
+    deleteTask,
+	getAssignedTasks
 };

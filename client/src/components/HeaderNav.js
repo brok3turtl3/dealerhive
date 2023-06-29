@@ -47,14 +47,14 @@ const handleClose = () => {
 			{userLogin.userInfo === null ? (
 			<nav>
 				<ul className='flex flex-row'>
-					<li className='p-4 text-yellow-200 text-xl' >Sign Up</li>
-					<li className='p-4 text-yellow-200 text-xl' onClick={handleLoginClick}>Log In</li>
-					<li></li>
+					{/* <li className='p-4 text-yellow-200 text-xl' >Sign Up</li> */}
+					<li className='p-4 text-yellow-200 hover:text-blue-500 text-3xl cursor-pointer' onClick={handleLoginClick}>Log In</li>
+					
 				</ul>
 			</nav>) :( 
 				<nav>
 				<ul className='flex flex-row'>
-					<li className='p-4 text-yellow-200 text-xl' onClick={handleLogoutClick}>Log Out</li>
+					<li className='p-4 text-yellow-200 hover:text-blue-500 text-3xl cursor-pointer' onClick={handleLogoutClick}>Log Out</li>
 					
 					<li></li>
 				</ul>
