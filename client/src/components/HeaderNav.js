@@ -11,15 +11,13 @@ const HeaderNav = () => {
 	const navigate = useNavigate()
 
 const [showLogin, setShowLogin] = useState(false)
-const userInfo = useSelector((state) => state.userLogin);
+const userLogin = useSelector((state) => state.userLogin);
 
 useEffect(() => {
-	if(userInfo.userInfo !== null){
-		navigate('./homepage')
-	}else{
-		navigate('/')
+	if (userLogin.userInfo === null) {
+	  navigate('/');
 	}
-},[userInfo.userInfo, navigate])
+  }, [userLogin.userInfo, navigate]);
 
 
 const handleLoginClick = () => {
@@ -46,7 +44,7 @@ const handleClose = () => {
 					<img className='w-16 sm:w-24' src='./images/honey.svg' alt='' />
 				
 			</div>
-			{userInfo.userInfo === null ? (
+			{userLogin.userInfo === null ? (
 			<nav>
 				<ul className='flex flex-row'>
 					<li className='p-4 text-yellow-200 text-xl' >Sign Up</li>

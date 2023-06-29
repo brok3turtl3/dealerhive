@@ -6,17 +6,17 @@ const LandingPage = () => {
 
 	const navigate = useNavigate();
 
-	const userInfo = useSelector((state) => state.userLogin);
+	const userLogin = useSelector((state) => state.userLogin);
 	
 
 
 	useEffect(() => {
-		if(userInfo.userInfo !== null){
-			console.log('PINGED')
-			navigate('/homepage')
+		if (userLogin.userInfo !== null) {
+		  console.log('PINGED');
+		  navigate('/homepage');
 		}
-		console.log(userInfo.userInfo)
-	}, [userInfo, navigate])
+		console.log(userLogin.userInfo);
+	  }, [userLogin.userInfo, navigate]);
 
 
 	return (
